@@ -1,7 +1,9 @@
 import React from 'react'
 
-export default function signin() {
+const Signin = () => {
   return (
-    <div>signin</div>
+    <div>Signin</div>
   )
 }
+
+export default Signin

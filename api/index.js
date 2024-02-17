@@ -3,6 +3,7 @@ const mongoose = require("mongoose")
 const dotenv = require("dotenv")
 const userRouter = require('./routes/user.routes') 
 const authRouter = require("./routes/auth.routes.js")
+const cors = require("cors")
 dotenv.config()
 
 mongoose.connect(process.env.MONGO)
@@ -14,6 +15,8 @@ mongoose.connect(process.env.MONGO)
 
 const app =  express();
 app.use(express.json());
+app.use(cors());
+
 
 app.use("/api/user",userRouter)
 app.use("/api/auth",authRouter)
@@ -24,7 +27,7 @@ app.use((err,req,res,next)=>{
     return res.status(statusCode).json({
         success : false,
         statusCode,
-        message
+        message 
     });
 });
 
