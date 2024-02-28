@@ -26,7 +26,7 @@ const Profile = () => {
     uploadTask.on('state_changed', 
         (snapshot) => {
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log('Upload is ' + progress + '% done');
+          // console.log('Upload is ' + progress + '% done');
           setFilePerc(Math.round(progress));
       
         }, 
@@ -37,7 +37,7 @@ const Profile = () => {
         () => {
       
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            console.log('File available at', downloadURL);
+            // console.log('File available at', downloadURL);
             setFormData({...FormData, avatar: downloadURL})
           });
         }
@@ -53,6 +53,7 @@ const Profile = () => {
           onChange={(e) => setFile(e.target.files[0])}
           type='file'
           ref={fileRef}
+          hidden
           accept='image/*'
         />
         <img
