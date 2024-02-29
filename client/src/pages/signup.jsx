@@ -22,7 +22,7 @@ export default function Signup() {
       e.preventDefault();
       try{
         setloading(true);
-        const res = await fetch("http://localhost:3000/api/auth/signup",{
+        const res = await fetch("/api/auth/signup",{
                 method: 'POST',
                 headers:{
                     'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ export default function Signup() {
         setloading(false);
       }
   }
-    console.log(formData);
+    // console.log(formData);
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl text-center font-semibold my-7'>Sign Up</h1>

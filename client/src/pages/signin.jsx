@@ -24,7 +24,7 @@ export default function Signup() {
       e.preventDefault();
       try{
         dispatch(signInStart())
-        const res = await fetch("http://localhost:3000/api/auth/signin",{
+        const res = await fetch("/api/auth/signin",{
                 method: 'POST',
                 headers:{
                     'Content-Type': 'application/json'
@@ -44,7 +44,7 @@ export default function Signup() {
        dispatch(signInFailure(err.message))
       }
   }
-    console.log(formData);
+    // console.log(formData);
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl text-center font-semibold my-7'>Sign Up</h1>

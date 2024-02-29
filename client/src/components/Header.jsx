@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 export default function Header() {
   
   const {currentUser } = useSelector((store) => store.user);
-  console.log(currentUser);
+  // console.log(currentUser);
   
  
   return (
