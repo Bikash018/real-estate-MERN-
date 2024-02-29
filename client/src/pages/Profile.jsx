@@ -5,7 +5,10 @@ import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/
 import {
   updateUserStart,
   updateUserFailure,
-  updateUserSuccess
+  updateUserSuccess,
+  deleteUserFailure,
+  deleteUserStart,
+  deleteUserSuccess,
 } from "../redux/user/userslice"
 
 
@@ -30,7 +33,30 @@ const Profile = () => {
         ...FormData,
         [e.target.id] : e.target.value
       })
-      console.log(FormData);
+      // console.log(FormData);
+    }
+
+    const handleDeleteUser = async ()=>{
+      try{
+        dispatch(deleteUserStart());
+        const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+          method: 'DELETE',
+        });
+
+        const data=await res.json()
+        if(data.success=== false){
+          dispatch(deleteUserFailure(data.message));
+          return 
+        }
+
+        dispatch(deleteUserSuccess(data));
+
+
+      } catch(err){
+        dispatch(deleteUserFailure(err.message));
+      }
+      
+
     }
 
     const handleSubmit = async (e)=>{
@@ -48,7 +74,7 @@ const Profile = () => {
           })
           const data = await res.json();
         
-          console.log(data);
+          // console.log(data);
           if(data.success === false){
             dispatch(updateUserFailure(data.message))
             return ;
@@ -140,6 +166,25 @@ const Profile = () => {
         {loading ? 'Loading...' : 'Update'}
         </button>
       </form>
+      <div className='flex justify-between mt-5'>
+        <span
+          onClick={handleDeleteUser}
+          className='text-red-700 cursor-pointer'
+        >
+          Delete account
+        </span>
+        <span className='text-red-700 cursor-pointer'>
+          Sign out
+        </span>
+      </div>
+
+      {/* <p className='text-red-700 mt-5'>{error ? error : ''}</p> */}
+      {/* <p className='text-green-700 mt-5'>
+        {updateSuccess ? 'User is updated successfully!' : ''}
+      </p> */}
+      
+
+     
      
     </div>
   )
